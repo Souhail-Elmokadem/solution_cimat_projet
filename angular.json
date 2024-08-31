@@ -88,8 +88,11 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
+           
             "assets": [
+              "src/assets",
               {
+          
                 "glob": "**/*",
                 "input": "public"
               }
@@ -102,5 +105,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
