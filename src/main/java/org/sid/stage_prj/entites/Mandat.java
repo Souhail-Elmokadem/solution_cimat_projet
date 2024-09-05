@@ -26,6 +26,7 @@ public class Mandat {
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Chauffeur chauffeur;
+    String lieuLivraison;
 
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

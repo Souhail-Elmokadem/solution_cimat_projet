@@ -3,6 +3,8 @@ package org.sid.stage_prj.services;
 import org.sid.stage_prj.entites.Chauffeur;
 import org.sid.stage_prj.repositories.ChauffeurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +29,11 @@ public class ChauffeurService {
 
     public void deleteChauffeur(Long id) {
         chauffeurRepository.deleteById(id);
+    }
+
+    public Page<Chauffeur> findByName(String kw, int page, int size) {
+       return chauffeurRepository.findByNomContaining(kw, PageRequest.of(page,size));
+
     }
 }
 

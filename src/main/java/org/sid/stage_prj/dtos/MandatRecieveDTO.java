@@ -28,6 +28,7 @@ public class MandatRecieveDTO {
     private String capital;
     private String adresseSociete;
     private String nomPrenomMandataire;
+    //private String photo;
     private String adresseMandataire;
     private String cinMandataire;
     private String lieuDelivrance;

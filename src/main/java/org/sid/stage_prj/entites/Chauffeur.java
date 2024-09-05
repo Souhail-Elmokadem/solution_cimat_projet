@@ -18,7 +18,7 @@ public class Chauffeur {
     private String cin;
     private String adresse;
     private String photo;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Mandat mandat;
 
     @ManyToOne

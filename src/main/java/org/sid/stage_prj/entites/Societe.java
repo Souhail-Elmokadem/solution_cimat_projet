@@ -18,7 +18,7 @@ public class Societe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Directeur directeur;
 
     private String adresse;
