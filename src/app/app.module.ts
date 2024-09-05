@@ -11,6 +11,7 @@ import { NavbarComponent } from './core/navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ListChauffeurComponent } from './list-chauffeur/list-chauffeur.component';
+import { EditMandatComponent } from './edit-mandat/edit-mandat.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ListChauffeurComponent } from './list-chauffeur/list-chauffeur.componen
     NavbarComponent,
     NavbarComponent,
     HomeComponent,
-    ListChauffeurComponent
+    ListChauffeurComponent,
+    EditMandatComponent
   ],
   imports: [
     BrowserModule,

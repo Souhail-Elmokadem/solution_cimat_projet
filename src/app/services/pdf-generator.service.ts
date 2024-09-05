@@ -8,7 +8,7 @@ export class PdfGeneratorService {
 
   constructor() { }
 
-  generatePdf(formValues: any) {
+  generatePdf(formValues: any,base64Image:String) {
     const pdf = new jsPDF();
     const marginLeft = 20;
     const marginTop = 20;
@@ -33,7 +33,7 @@ export class PdfGeneratorService {
     pdf.text(formValues.cin, marginLeft + 60, currentY);
 
     // Second Section
-    currentY += 20;
+    currentY += 10;
     pdf.text("Agissant pour:", marginLeft, currentY);
     currentY += 10;
     pdf.text("Nom de la société:", marginLeft + 10, currentY);
@@ -59,41 +59,58 @@ export class PdfGeneratorService {
     pdf.text(formValues.cinMandataire, marginLeft + 60, currentY);
 
     // Fourth Section
-    currentY += 20;
+    currentY += 10;
     pdf.text("À l'effet en sa qualité de mandataire de:", marginLeft, currentY);
     currentY += 10;
-    pdf.text("D’enlever les produits qui figurent  sur les bons de commande émis et de signer les bons \n de livraison à la sortie de l'usine.", marginLeft, currentY);
+    pdf.text("D’enlever les produits qui figurent  sur les bons de commande émis et de signer les bons \nde livraison à la sortie de l'usine.", marginLeft, currentY);
     currentY += 10;
-    pdf.text("Le lieu du mandataire selon le spécimen ci-dessous, fait foi d'accueil de réception \n  en mon nom des marchandises.", marginLeft, currentY);
-    currentY += 10;
+    pdf.text("Le lieu du mandataire selon le spécimen ci-dessous, fait foi d'accueil de réception \nen mon nom des marchandises.", marginLeft, currentY);
+    currentY += 15;
     pdf.text("Fait à: " + formValues.lieuDelivrance, marginLeft, currentY);
-    currentY += 10;
+    currentY += 5;
     pdf.text("Date: " + formValues.dateDelivrance, marginLeft, currentY);
 
     // Checkbox Section
-    currentY += 20;
+    currentY += 10;
     pdf.text("Ce mandat est valable pour les points d'expédition suivants:", marginLeft, currentY);
     currentY += 10;
 
     // Iterate through points and check if they're selected
     const points = ['BENAHMED', 'BENIMELLAL', 'SALE', 'FES', 'MARRAKECH'];
+    var textcities="";
     points.forEach(point => {
       if (formValues[point]) {
-        pdf.text(`- ${this.getPointLabel(point)}`, marginLeft, currentY);
-        currentY += 10;
+        textcities += `${this.getPointLabel(point)} -`
+        // pdf.text(`- ${this.getPointLabel(point)}`, marginLeft, currentY);
+        // currentY += 10;
       }
     });
+    pdf.text(textcities,marginLeft,currentY)
+    currentY += 10;
+
 
     // Signatures
-    currentY += 10;
+    currentY += 5;
     pdf.text("Signature et cachet mandant", marginLeft + 10, currentY);
     pdf.text("Signature mandataire (*)", marginLeft + 70, currentY);
     pdf.text("Photo mandataire", marginLeft + 140, currentY);
+    if (base64Image) {
+      const imgWidth = 25; // Set desired image width
+      const imgHeight = 25; // Set desired image height
+      currentY += 10;
+      pdf.addImage(base64Image.toString(), 'JPEG', marginLeft+145, currentY, imgWidth, imgHeight); // Adjust as needed
+      currentY += imgHeight + 10; // Move the Y position down to avoid overlap
+    }
     currentY += 10;
     pdf.text(formValues.signatureMandant, marginLeft + 10, currentY);
     pdf.text(formValues.signatureMandataire, marginLeft + 70, currentY);
+    const blob = pdf.output('blob');
+    const blobUrl = URL.createObjectURL(blob);
 
-    pdf.save('mandate.pdf');
+    // Open PDF in a new tab
+    window.open(blobUrl, '_blank');
+    //pdf.save('mandate.pdf');
+
   }
 
   private getPointLabel(id: string): string {

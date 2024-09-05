@@ -1,7 +1,7 @@
 export interface MandatModel {
   BENAHMED: boolean,
   BENIMELLAL: boolean,
-  FES: boolean,
+    FES: boolean,
     MARRAKECH: boolean,
     SALE: boolean,
     nomPrenom: string;

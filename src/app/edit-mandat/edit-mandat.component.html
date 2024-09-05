@@ -1,0 +1,102 @@
+<div class="container mx-auto p-6" id="pdfContent">
+    <h2 class="text-xl font-semibold mb-4">Mandat de représentation pour les livraisons de Chèvres de l'Atlas</h2>
+    <form [formGroup]="mandatedata" (ngSubmit)="onSubmit()">
+      <div class="flex flex-wrap -mx-2">
+        <div class="w-full md:w-1/2 px-2">
+  <fieldset >
+    <legend>&nbsp;Directeur &nbsp;</legend>
+    <div class="form-group mb-4">
+      <label for="nomPrenom" class="block text-sm font-medium text-gray-700">Je soussigné</label>
+      <input type="text" id="nomPrenom" formControlName="nomPrenom" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="nom">
+    </div>
+  
+    <div class="form-group mb-4">
+      <label for="adresse" class="block text-sm font-medium text-gray-700">Adresse</label>
+      <input type="text" id="adresse" formControlName="adresse" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="adresse">
+    </div>
+  
+    <div class="form-group mb-4">
+      <label for="cin" class="block text-sm font-medium text-gray-700">N° CIN</label>
+      <input type="text" id="cin" formControlName="cin" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="cin">
+    </div>
+  </fieldset>
+  
+  
+          <fieldset class="mb-4 mt-5">
+            <legend class="text-sm font-medium text-gray-700 mb-2">&nbsp;Ce mandat est valable pour les points d'expédition suivants :&nbsp;</legend>
+            <div *ngFor="let point of points">
+              <div class="flex items-center h-5 mb-2">
+                <input type="checkbox" [formControlName]="point.id" class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                <label class="ml-2 text-sm font-medium text-gray-700"> {{ point.label }}</label>
+              </div>
+            </div>
+          </fieldset>
+  <fieldset class="mb-4">
+    <legend>&nbsp;Societe &nbsp;</legend>
+    <div class="form-group mb-4">
+            <label for="societe" class="block text-sm font-medium text-gray-700">Agissant pour</label>
+            <input type="text" id="societe" formControlName="societe" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Societe Nom">
+          </div>
+          <div class="form-group mb-4">
+            <label for="capital" class="block text-sm font-medium text-gray-700">Capital de</label>
+            <input type="text" id="capital" formControlName="capital" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="capitale">
+          </div>
+  
+          <div class="form-group mb-4">
+            <label for="adresseSociete" class="block text-sm font-medium text-gray-700">Adresse de la société</label>
+            <input type="text" id="adresseSociete" formControlName="adresseSociete" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="adresse societe">
+          </div>
+  </fieldset>
+          
+  
+         
+        </div>
+  
+        <div class="w-full md:w-1/2 px-2"> 
+          <fieldset>        
+            <legend>&nbsp;Chauffeur&nbsp;</legend>
+            <div class="form-group mb-4">
+            <label for="nomPrenomMandataire" class="block text-sm font-medium text-gray-700">Nom & Prénom du mandataire</label>
+            <input type="text" id="nomPrenomMandataire" formControlName="nomPrenomMandataire" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="nom complet">
+          </div>
+          <div class="form-group mb-4">
+            <label for="adresseMandataire" class="block text-sm font-medium text-gray-700">Adresse du mandataire</label>
+            <input type="text" id="adresseMandataire" formControlName="adresseMandataire" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="adresse">
+          </div>
+          <div class="form-group mb-4">
+            <label for="cinMandataire" class="block text-sm font-medium text-gray-700">CIN du mandataire</label>
+            <input type="text" id="cinMandataire" formControlName="cinMandataire" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="cin">
+          </div>
+          <div class="form-group mb-4">
+            <label for="photoMandatsire" class="block text-sm font-medium text-gray-700">photo du mandataire</label>
+            <img *ngIf="base64Image" [src]="base64Image" width="100" class="mb-5 mt-5" alt="" srcset="">
+            <img *ngIf="!base64Image" [src]="chauffaur.photo" width="100" class="mb-5 mt-5" alt="" srcset="">
+            <input type="file" (change)="onFileSelected($event)"> </div>
+  
+          
+          <div class="form-group mb-4">
+            <label for="lieuDelivrance" class="block text-sm font-medium text-gray-700">Lieu de délivrance</label>
+            <input type="text" id="lieuDelivrance" formControlName="lieuDelivrance" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="lieu">
+          </div>
+  
+          <div class="form-group mb-4">
+            <label for="dateDelivrance" class="block text-sm font-medium text-gray-700">Date de délivrance</label>
+            <input type="date" id="dateDelivrance" formControlName="dateDelivrance" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+          </div></fieldset>
+  
+  
+          <div class="form-group mb-4 hidden">
+            <label for="signatureMandant" class="block text-sm font-medium text-gray-700">Signature (mandant)</label>
+            <input type="text" id="signatureMandant" formControlName="signatureMandant" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+          </div>
+  
+          <div class="form-group mb-4 hidden">
+            <label for="signatureMandataire" class="block text-sm font-medium text-gray-700">Signature (mandataire)</label>
+            <input type="text" id="signatureMandataire" formControlName="signatureMandataire" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Soumettre</button>
+    </form>
+  </div>
+  

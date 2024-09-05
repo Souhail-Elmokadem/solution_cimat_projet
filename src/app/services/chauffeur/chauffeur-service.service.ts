@@ -11,7 +11,7 @@ export class ChauffeurServiceService {
   constructor(private http:HttpClient) { }
   apiUrl = "http://localhost:8084";
 
-  getChauffeurs():Observable<chauffeur>{
-    return this.http.get<chauffeur>(this.apiUrl+"/chauffeurs");
+  getChauffeurs(kw: string):Observable<chauffeur>{
+    return this.http.get<chauffeur>(this.apiUrl+"/chauffeurs?search="+kw);
   }
 }
